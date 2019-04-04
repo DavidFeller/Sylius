@@ -14,8 +14,8 @@ import 'sylius/ui/app';
 import 'sylius/ui/sylius-auto-complete';
 import 'sylius/ui/sylius-product-attributes';
 import 'sylius/ui/sylius-product-auto-complete';
-import 'sylius/ui/sylius-prototype-handler';
 
+import 'sylius/ui/sylius-prototype-handler';
 import './sylius-compound-form-errors';
 import './sylius-lazy-choice-tree';
 import './sylius-move-product';
@@ -79,6 +79,25 @@ $(document).ready(() => {
         $(element).autoComplete();
       }
     });
+  });
+
+  const $table = $('#content table');
+  const $gridCheckAll = $('#grid-check-all');
+
+  $gridCheckAll.on('change', (e) => {
+    e.preventDefault();
+    const $isChecked = $gridCheckAll.prop('checked');
+    $table
+      .find('.bulk-select-checkbox')
+      .each((index, element) => {
+        if ($isChecked) {
+          $(element)
+            .prop('checked', 'checked');
+        } else {
+          $(element)
+            .prop('checked', null);
+        }
+      });
   });
 
   $('.sylius-tabular-form').addTabErrors();
